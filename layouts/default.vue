@@ -1,5 +1,5 @@
 <template>
-  <main class="container relative min-h-screen pt-16">
+  <main class="min-h-screen pt-16 width">
     <Alert />
     <Header />
     <nuxt />
@@ -36,8 +36,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  width:100%;
 }
-
+html{
+  
+  background:pink;
+}
 *,
 *::before,
 *::after {
@@ -73,4 +77,5 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
 </style>

@@ -18,12 +18,33 @@ service cloud.firestore {
             && request.resource.data[param] is string
             && request.resource.data[param].trim().size() != 0;
     }
+    function isTimeStamp(param){
+        return require(param)
+            && request.resource.data[param] is timestamp
+    }
      match /users/{userId} {
      // ここにusersCollectionの設定していきます!!
-     allow get : if isAuth();
-     allow create: if isUserAuth(userId)
-                  && isNotEmpty("name")
-                  && isNotEmpty("iconImageUrl");
+        allow get : if isAuth();
+        allow create: if isUserAuth(userId)
+            && isNotEmpty("name")
+            && isNotEmpty("iconImageUrl");
     }
+    match /rooms/{roomId} {
+        allow read : if isAuth();
+        allow create: if isAuth()
+            && isNotEmpty("name")
+            && isNotEmpty("content")
+            && isNotEmpty("topImageUrl")
+            && isTimeStamp("createdAt");
+    } 
+    match /rooms/{roomId}/chats/{chatId}{
+        allow read : if isAuth();
+        allow create: if isAuth()
+            && isUserAuth(request.resource.data.userId)
+            && isNotEmpty("name")
+            && isNotEmpty("iconImageUrl")
+            && isNotEmpty("body")
+            && isTimeStamp("createdAt");
+      }
   }
 }
