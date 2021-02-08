@@ -1,4 +1,8 @@
-# random-chat
+
+
+
+# ポートフォリオ投稿サイト
+nuxt.js,firebaseで作成
 
 ## Build Setup
 
